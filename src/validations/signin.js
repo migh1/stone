@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import ERRORS from '../utils';
+import { ERRORS } from '../utils';
 
 const authenticate = yup.object().shape({
   body: yup

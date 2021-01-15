@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import ERRORS from '../utils';
+import { ERRORS } from '../utils';
 
 const withdraw = yup.object().shape({
   body: yup
