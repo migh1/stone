@@ -10,7 +10,7 @@ export default {
       const accountResponse = await accountsService.find(body);
 
       if (accountResponse.status === httpStatus.OK) {
-        const response = await signinService.signin(accountResponse);
+        const response = await signinService.signin(accountResponse.body.email);
 
         return res.status(response.status).send(response.body);
       }

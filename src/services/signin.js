@@ -3,8 +3,8 @@ import { jwt } from '../utils';
 // import { signinRepository } from '../repositories';
 
 export default {
-  async signin(account) {
-    const token = jwt.sign(account);
+  async signin(email) {
+    const token = jwt.sign(email);
 
     return {
       status: httpStatus.OK,
