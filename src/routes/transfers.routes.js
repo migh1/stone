@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import validate from '../middlewares';
+import { validate, auth } from '../middlewares';
 import { transferSchema } from '../validations';
 import TransfersController from '../controllers/TransfersController';
 
 const router = Router();
 
-router.get('/', TransfersController.list);
-router.post('/', validate(transferSchema.transfers), TransfersController.transfers);
+router.get('/', auth, TransfersController.list);
+router.post('/', auth, validate(transferSchema.transfers), TransfersController.transfers);
 
 export default router;

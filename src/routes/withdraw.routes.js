@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import validate from '../middlewares';
+import { validate } from '../middlewares';
 import { withdrawSchema } from '../validations';
 import WithdrawController from '../controllers/WithdrawController';
 
