@@ -5,13 +5,14 @@
   "author": "ojuara <lucas.araujo@ambar.tech>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon ./src/server.js"
+    "dev": "nodemon ./src/server.js --ignore /src/database/db.json"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "http-status-codes": "^2.1.4",
+    "lokijs": "^1.5.11",
     "sucrase": "^3.17.0",
     "yup": "^0.32.8"
   },
