@@ -1,9 +1,9 @@
 import { db } from '../utils';
 
-const findIfNotExists = (email) => {
-  const data = db.getCollection('accounts').find({ email });
+const find = (email) => {
+  const data = db.getCollection('accounts').findObject({ email });
 
-  return data.length;
+  return data;
 };
 
 const create = (accountObject) => {
@@ -13,4 +13,4 @@ const create = (accountObject) => {
   return data;
 };
 
-export default { findIfNotExists, create };
+export default { find, create };
