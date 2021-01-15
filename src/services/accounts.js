@@ -3,9 +3,15 @@ import { accountsRepository } from '../repositories';
 
 export default {
   async create(body) {
-    // TODO
+    const { name, email, password } = body;
 
-    const response = accountsRepository.create(body);
+    const accountObject = {
+      name,
+      email,
+      password,
+    };
+
+    const response = accountsRepository.create(accountObject);
 
     return {
       status: httpStatus.OK,
