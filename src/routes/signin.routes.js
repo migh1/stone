@@ -5,6 +5,6 @@ import SigninController from '../controllers/SigninController';
 
 const router = Router();
 
-router.post('/', validate(signinSchema.authenticate), SigninController.authenticate);
+router.post('/', validate(signinSchema.signin), SigninController.signin);
 
 export default router;

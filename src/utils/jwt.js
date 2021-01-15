@@ -5,14 +5,7 @@ const keys = {
   expirationTime: 60 * 60,
 };
 
-const jwtSign = (data) =>
-  jwt.sign(
-    {
-      data,
-    },
-    keys.secret,
-    { expiresIn: keys.expirationTime },
-  );
+const jwtSign = (data) => jwt.sign(data, keys.secret, { expiresIn: keys.expirationTime });
 
 export default {
   sign: jwtSign,

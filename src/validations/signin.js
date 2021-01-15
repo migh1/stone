@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 import { ERRORS } from '../utils';
 
-const authenticate = yup.object().shape({
+const signin = yup.object().shape({
   body: yup
     .object()
     .shape({
@@ -12,4 +12,4 @@ const authenticate = yup.object().shape({
     .required(ERRORS.isMissing('body')),
 });
 
-export default { authenticate };
+export default { signin };

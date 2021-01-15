@@ -22,7 +22,10 @@ export default {
       };
     }
 
-    return account;
+    return {
+      status: httpStatus.OK,
+      body: account,
+    };
   },
 
   async create(body) {
@@ -48,7 +51,7 @@ export default {
     const response = accountsRepository.create(accountObject);
 
     return {
-      status: httpStatus.OK,
+      status: httpStatus.CREATED,
       body: response,
     };
   },

@@ -3,15 +3,19 @@ import httpStatus from 'http-status-codes';
 import { accountsService, signinService } from '../services';
 
 export default {
-  async authenticate(req, res) {
+  async signin(req, res) {
     try {
       const { body } = req;
 
-      const account = await accountsService.find(body);
+      const accountResponse = await accountsService.find(body);
 
-      const response = await signinService.sign(account);
+      if (accountResponse.status === httpStatus.OK) {
+        const response = await signinService.signin(accountResponse);
 
-      res.status(response.status).send(response.body);
+        return res.status(response.status).send(response.body);
+      }
+
+      return res.status(accountResponse.status).send(accountResponse.body);
     } catch (error) {
       console.error(error);
       res.status(error.status || httpStatus.INTERNAL_SERVER_ERROR).send(error.message);
