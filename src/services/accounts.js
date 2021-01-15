@@ -1,4 +1,5 @@
 import httpStatus from 'http-status-codes';
+import { cryptoKeys, crypto } from '../utils';
 import { accountsRepository } from '../repositories';
 
 export default {
@@ -17,8 +18,9 @@ export default {
     const accountObject = {
       name,
       email,
-      password,
+      password: crypto.encrypt(password),
       ammount: 1000,
+      created_at: Date.now(),
     };
 
     const response = accountsRepository.create(accountObject);
