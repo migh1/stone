@@ -6,16 +6,17 @@ const keys = {
   type: 'hex',
 };
 
-const cipher = crypto.createCipher(keys.alg, keys.secret);
-const decipher = crypto.createDecipher(keys.alg, keys.secret);
-
 const encrypt = (pass) => {
+  const cipher = crypto.createCipher(keys.alg, keys.secret);
+
   cipher.update(pass);
 
   return cipher.final(keys.type);
 };
 
 const decrypt = (pass) => {
+  const decipher = crypto.createDecipher(keys.alg, keys.secret);
+
   decipher.update(pass, keys.type);
 
   return decipher.final('utf8');
