@@ -8,5 +8,6 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
+  "max-len": ["error", { "code": 120 }],
   "rules": {}
 }
