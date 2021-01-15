@@ -1,13 +1,15 @@
 /* eslint-disable no-console */
 import httpStatus from 'http-status-codes';
-import { signinService } from '../services';
+import { accountsService, signinService } from '../services';
 
 export default {
   async authenticate(req, res) {
     try {
       const { body } = req;
 
-      const response = await signinService.authenticate(body);
+      const account = await accountsService.find(body);
+
+      const response = await signinService.sign(account);
 
       res.status(response.status).send(response.body);
     } catch (error) {

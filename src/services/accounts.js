@@ -1,14 +1,36 @@
 import httpStatus from 'http-status-codes';
-import { cryptoKeys, crypto } from '../utils';
+import { crypto } from '../utils';
 import { accountsRepository } from '../repositories';
 
 export default {
+  async find(body) {
+    const { email, password } = body;
+
+    const account = accountsRepository.find(email);
+
+    if (!account) {
+      return {
+        status: httpStatus.NOT_FOUND,
+        body: `Account not found for email ${email}`,
+      };
+    }
+
+    if (password !== crypto.decrypt(account.password)) {
+      return {
+        status: httpStatus.UNAUTHORIZED,
+        body: `Invalid Password`,
+      };
+    }
+
+    return account;
+  },
+
   async create(body) {
     const { name, email, password } = body;
 
-    const exists = accountsRepository.findIfNotExists(email);
+    const account = accountsRepository.find(email);
 
-    if (exists) {
+    if (account) {
       return {
         status: httpStatus.CONFLICT,
         body: 'This account already exists',

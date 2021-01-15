@@ -1,15 +1,14 @@
 import httpStatus from 'http-status-codes';
-import { signinRepository } from '../repositories';
+import { jwt } from '../utils';
+// import { signinRepository } from '../repositories';
 
 export default {
-  async authenticate(body) {
-    // TODO
-
-    const response = signinRepository.authenticate(body);
+  async sign(account) {
+    const token = jwt.sign(account);
 
     return {
       status: httpStatus.OK,
-      body: response,
+      body: token,
     };
   },
 };

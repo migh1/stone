@@ -1,5 +1,5 @@
-const authenticate = (body) => {
+const verify = (account) => {
   // TODO
 };
 
-export default { authenticate };
+export default { verify };
