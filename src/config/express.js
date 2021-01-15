@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import * as routes from '../routes';
 import config from './env';
+import './database';
 
 dotenv.config();
 
