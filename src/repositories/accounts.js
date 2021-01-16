@@ -13,4 +13,10 @@ const create = (accountObject) => {
   return data;
 };
 
-export default { find, create };
+const getIdByEmail = (email) => {
+  const data = db.getCollection('accounts').findObject({ email });
+
+  return data;
+};
+
+export default { find, create, getIdByEmail };

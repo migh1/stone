@@ -55,4 +55,20 @@ export default {
       body: response,
     };
   },
+
+  async getIdByEmail(email) {
+    const id = accountsRepository.getIdByEmail(email);
+
+    if (!id) {
+      return {
+        status: httpStatus.NOT_FOUND,
+        body: 'Account not found',
+      };
+    }
+
+    return {
+      status: httpStatus.OK,
+      body: id,
+    };
+  },
 };

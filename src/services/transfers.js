@@ -2,10 +2,8 @@ import httpStatus from 'http-status-codes';
 import { transfersRepository } from '../repositories';
 
 export default {
-  async list(body) {
-    // TODO
-
-    const response = transfersRepository.list(body);
+  async list(accountId) {
+    const response = transfersRepository.list(accountId);
 
     return {
       status: httpStatus.OK,
