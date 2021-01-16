@@ -2,7 +2,8 @@ import httpStatus from 'http-status-codes';
 import { jwt } from '../utils';
 
 export default (req, res, next) => {
-  const token = req.headers['authorization'];
+  const authorization = req.headers['authorization'];
+  const token = authorization.split(' ').pop();
 
   if (!token) return res.status(httpStatus.UNAUTHORIZED).send('No token provided');
 
