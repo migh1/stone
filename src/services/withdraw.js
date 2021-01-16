@@ -1,15 +1,22 @@
 import httpStatus from 'http-status-codes';
-import { withdrawRepository } from '../repositories';
+import { accountsRepository } from '../repositories';
 
 export default {
-  async withdraw(body) {
-    // TODO
+  async withdraw(account, amount) {
+    const isSuitableForTransfer = account.amount >= amount;
 
-    const response = withdrawRepository.withdraw(body);
+    if (isSuitableForTransfer) {
+      accountsRepository.updateAccountsAmount(account.email, null, amount);
+
+      return {
+        status: httpStatus.OK,
+        body: 'Withdraw successfully',
+      };
+    }
 
     return {
-      status: httpStatus.OK,
-      body: response,
+      status: httpStatus.PRECONDITION_FAILED,
+      body: 'Insufficient amount to proceed',
     };
   },
 };
