@@ -45,7 +45,6 @@ export default {
       email,
       password: crypto.encrypt(password),
       ammount: 1000,
-      created_at: Date.now(),
     };
 
     const response = accountsRepository.create(accountObject);
@@ -62,7 +61,7 @@ export default {
     if (!id) {
       return {
         status: httpStatus.NOT_FOUND,
-        body: 'Account not found',
+        body: `Account for email: ${email} not found`,
       };
     }
 

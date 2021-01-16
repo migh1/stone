@@ -1,4 +1,5 @@
 import httpStatus from 'http-status-codes';
+import { db } from '../utils';
 import { transfersRepository } from '../repositories';
 
 export default {
@@ -10,14 +11,13 @@ export default {
       body: response,
     };
   },
-  async transfers(body) {
-    // TODO
-
-    const response = transfersRepository.transfers(body);
+  async transfers(originAccount, targetAccount, amount) {
+    const createTransfer = transfersRepository.transfers(originAccount.email, targetAccount.email, amount);
+    db.saveDatabase();
 
     return {
       status: httpStatus.OK,
-      body: response,
+      body: createTransfer,
     };
   },
 };

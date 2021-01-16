@@ -24,14 +24,27 @@ export default {
 
   async transfers(req, res) {
     try {
-      const { body } = req;
+      const { user, body } = req;
 
-      const response = await transfersService.transfers(body);
+      const originAccountResponse = await accountsService.getIdByEmail(user.email);
+      if (originAccountResponse.status > 400) {
+        return res.status(originAccountResponse.status).send(originAccountResponse.body);
+      }
 
-      res.status(response.status).send(response.body);
+      const targetAccountResponse = await accountsService.getIdByEmail(body.target_email);
+      if (targetAccountResponse.status > 400) {
+        return res.status(targetAccountResponse.status).send(targetAccountResponse.body);
+      }
+
+      const response = await transfersService.transfers(
+        originAccountResponse,
+        targetAccountResponse,
+        body.amount,
+      );
+      return res.status(response.status).send(response.body);
     } catch (error) {
       console.error(error);
-      res.status(error.status || httpStatus.INTERNAL_SERVER_ERROR).send(error.message);
+      return res.status(error.status || httpStatus.INTERNAL_SERVER_ERROR).send(error.message);
     }
   },
 };

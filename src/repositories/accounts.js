@@ -7,7 +7,7 @@ const find = (email) => {
 };
 
 const create = (accountObject) => {
-  const data = db.getCollection('accounts').insert(accountObject);
+  const data = db.getCollection('accounts').insert({ ...accountObject, created_at: Date.now() });
   db.saveDatabase();
 
   return data;
