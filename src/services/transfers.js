@@ -1,5 +1,5 @@
 import httpStatus from 'http-status-codes';
-import { transfersRepository } from '../repositories';
+import { accountsRepository, transfersRepository } from '../repositories';
 
 export default {
   async list(email) {
@@ -10,12 +10,23 @@ export default {
       body: response,
     };
   },
-  async transfers(originEmail, targetEmail, amount) {
-    const createTransfer = transfersRepository.transfers(originEmail, targetEmail, amount);
+  async transfers(originAccount, targetAccount, amount) {
+    const isSuitableForTransfer = originAccount.amount >= amount;
+
+    if (isSuitableForTransfer) {
+      accountsRepository.updateAccountsAmount(originAccount.email, targetAccount.email, amount);
+
+      const createTransfer = transfersRepository.transfers(originAccount.email, targetAccount.email, amount);
+
+      return {
+        status: httpStatus.OK,
+        body: createTransfer,
+      };
+    }
 
     return {
-      status: httpStatus.OK,
-      body: createTransfer,
+      status: httpStatus.PRECONDITION_FAILED,
+      body: 'Insufficient amount to proceed',
     };
   },
 };

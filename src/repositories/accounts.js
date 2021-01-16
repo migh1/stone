@@ -13,4 +13,22 @@ const create = (accountObject) => {
   return data;
 };
 
-export default { find, create };
+const updateAccountsAmount = (originEmail, targetEmail, amount) => {
+  const filterFun = (record) => [originEmail, targetEmail].includes(record.email);
+  const updateFun = (obj) => {
+    if (obj.email === originEmail) {
+      return { ...obj, amount: obj.amount - amount };
+    }
+    if (obj.email === targetEmail) {
+      return { ...obj, amount: obj.amount + amount };
+    }
+  };
+
+  const data = db.getCollection('accounts').updateWhere(filterFun, updateFun);
+
+  db.saveDatabase();
+
+  return data;
+};
+
+export default { find, create, updateAccountsAmount };

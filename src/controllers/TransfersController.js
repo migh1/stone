@@ -37,8 +37,8 @@ export default {
       }
 
       const response = await transfersService.transfers(
-        originAccountResponse.body.email,
-        targetAccountResponse.body.email,
+        originAccountResponse.body,
+        targetAccountResponse.body,
         body.amount,
       );
       return res.status(response.status).send(response.body);

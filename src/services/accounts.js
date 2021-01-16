@@ -44,7 +44,7 @@ export default {
       name,
       email,
       password: crypto.encrypt(password),
-      ammount: 1000,
+      amount: 1000,
     };
 
     const response = accountsRepository.create(accountObject);
