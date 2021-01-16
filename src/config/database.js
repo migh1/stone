@@ -4,7 +4,7 @@ const db = new Loki('src/database/db.json', {
   autoload: true,
   autoupdate: true,
   autosave: true,
-  autosaveInterval: 5000,
+  autosaveInterval: 500,
 });
 
 db.addCollection('accounts');

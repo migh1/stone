@@ -1,7 +1,9 @@
 import { db } from '../utils';
 
-const list = (accountId) => {
-  const data = db.getCollection('transfers').findObjects({ account_id: accountId });
+const list = (email) => {
+  const data = db.getCollection('transfers').findObjects({
+    $or: [{ origin_email: email }, { target_email: email }],
+  });
 
   return !data ? [] : data;
 };
@@ -13,6 +15,8 @@ const transfers = (originEmail, targetEmail, amount) => {
     amount,
     created_at: Date.now(),
   });
+
+  db.saveDatabase();
 
   return data;
 };

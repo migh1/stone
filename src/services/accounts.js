@@ -55,10 +55,10 @@ export default {
     };
   },
 
-  async getIdByEmail(email) {
-    const id = accountsRepository.getIdByEmail(email);
+  async findByEmail(email) {
+    const account = accountsRepository.find(email);
 
-    if (!id) {
+    if (!account) {
       return {
         status: httpStatus.NOT_FOUND,
         body: `Account for email: ${email} not found`,
@@ -67,7 +67,7 @@ export default {
 
     return {
       status: httpStatus.OK,
-      body: id,
+      body: account,
     };
   },
 };

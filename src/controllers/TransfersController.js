@@ -7,10 +7,10 @@ export default {
     try {
       const { user } = req;
 
-      const accountResponse = await accountsService.getIdByEmail(user.email);
+      const accountResponse = await accountsService.findByEmail(user.email);
 
       if (accountResponse.status === httpStatus.OK) {
-        const response = await transfersService.list(accountResponse.body.$loki);
+        const response = await transfersService.list(accountResponse.body.email);
 
         return res.status(response.status).send(response.body);
       }
@@ -26,19 +26,19 @@ export default {
     try {
       const { user, body } = req;
 
-      const originAccountResponse = await accountsService.getIdByEmail(user.email);
+      const originAccountResponse = await accountsService.findByEmail(user.email);
       if (originAccountResponse.status > 400) {
         return res.status(originAccountResponse.status).send(originAccountResponse.body);
       }
 
-      const targetAccountResponse = await accountsService.getIdByEmail(body.target_email);
+      const targetAccountResponse = await accountsService.findByEmail(body.target_email);
       if (targetAccountResponse.status > 400) {
         return res.status(targetAccountResponse.status).send(targetAccountResponse.body);
       }
 
       const response = await transfersService.transfers(
-        originAccountResponse,
-        targetAccountResponse,
+        originAccountResponse.body.email,
+        targetAccountResponse.body.email,
         body.amount,
       );
       return res.status(response.status).send(response.body);

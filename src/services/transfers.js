@@ -1,19 +1,17 @@
 import httpStatus from 'http-status-codes';
-import { db } from '../utils';
 import { transfersRepository } from '../repositories';
 
 export default {
-  async list(accountId) {
-    const response = transfersRepository.list(accountId);
+  async list(email) {
+    const response = transfersRepository.list(email);
 
     return {
       status: httpStatus.OK,
       body: response,
     };
   },
-  async transfers(originAccount, targetAccount, amount) {
-    const createTransfer = transfersRepository.transfers(originAccount.email, targetAccount.email, amount);
-    db.saveDatabase();
+  async transfers(originEmail, targetEmail, amount) {
+    const createTransfer = transfersRepository.transfers(originEmail, targetEmail, amount);
 
     return {
       status: httpStatus.OK,
