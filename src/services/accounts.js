@@ -6,7 +6,7 @@ export default {
   async find(body) {
     const { email, password } = body;
 
-    const account = accountsRepository.find(email);
+    const account = await accountsRepository.find(email);
 
     if (!account) {
       return {
@@ -31,7 +31,7 @@ export default {
   async create(body) {
     const { name, email, password } = body;
 
-    const account = accountsRepository.find(email);
+    const account = await accountsRepository.find(email);
 
     if (account) {
       return {
@@ -47,7 +47,7 @@ export default {
       amount: 1000,
     };
 
-    const response = accountsRepository.create(accountObject);
+    const response = await accountsRepository.create(accountObject);
 
     return {
       status: httpStatus.CREATED,
@@ -56,7 +56,7 @@ export default {
   },
 
   async findByEmail(email) {
-    const account = accountsRepository.find(email);
+    const account = await accountsRepository.find(email);
 
     if (!account) {
       return {
