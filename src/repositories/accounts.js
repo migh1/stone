@@ -1,4 +1,4 @@
-import { db } from '../utils';
+import db from '../config/database';
 
 const find = (email) => {
   const data = db.getCollection('accounts').findObject({ email });

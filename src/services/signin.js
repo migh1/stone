@@ -1,6 +1,5 @@
 import httpStatus from 'http-status-codes';
 import { jwt } from '../utils';
-// import { signinRepository } from '../repositories';
 
 export default {
   async signin(email) {

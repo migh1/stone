@@ -4,7 +4,7 @@ dotenv.config();
 
 export default {
   env: process.env.NODE_ENV,
-  port: process.env.PORT,
+  port: process.env.NODE_ENV === 'test' ? 5001 : process.env.PORT,
   version: '1',
   corsOptions: {
     origin: '*',

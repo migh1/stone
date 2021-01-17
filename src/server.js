@@ -8,3 +8,5 @@ app
   .on('error', (err) => {
     console.log(err.code, err);
   });
+
+export default app;

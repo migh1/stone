@@ -1,3 +1,4 @@
 node_modules
 .env
-src/database/db.json
+src/database/*.json
+coverage

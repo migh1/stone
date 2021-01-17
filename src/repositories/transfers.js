@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { db } from '../utils';
+import db from '../config/database';
 
 const list = (email) => {
   const data = db.getCollection('transfers').find({

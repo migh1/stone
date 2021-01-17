@@ -1,6 +1,8 @@
 import Loki from 'lokijs';
 
-const db = new Loki('src/database/db.json', {
+const dbPath = process.env.NODE_ENV === 'test' ? 'src/database/db-test.json' : 'src/database/db.json';
+
+const db = new Loki(dbPath, {
   autoload: true,
   autoupdate: true,
   autosave: true,
@@ -13,3 +15,5 @@ db.addCollection('transfers');
 db.addCollection('withdraw');
 
 db.saveDatabase();
+
+export default db;
